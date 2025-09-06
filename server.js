@@ -16,6 +16,7 @@ const static = require("./routes/static")
  *************************/
 app.use(static)
 
+
 /* ***********************
  * View Engine and Templates
  *************************/
