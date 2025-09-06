@@ -27,8 +27,8 @@ app.set("layout", "./layouts/layout") // not at views root
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 3000
-const host = process.env.HOST || "localhost"
+const port = process.env.PORT 
+const host = process.env.HOST
 
 
 /* ***********************
