@@ -38,3 +38,9 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
+
+/* ******************************************
+ * Default GET route
+ * ***************************************** */
+app.get("/", (req, res) => {res.send("Welcome home!")})
