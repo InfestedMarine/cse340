@@ -6,7 +6,7 @@ CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340_database_zch0_user;
+    OWNER TO cse340_database_user;
 
 
 --Table structure for table 'classification'
@@ -51,3 +51,28 @@ CREATE TABLE IF NOT EXISTS public.account
     account_type account_type NOT NULL DEFAULT 'Client'::account_type,
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
+
+-- Insert classification rows for testing
+INSERT INTO classification (classification_name) VALUES
+('Sport'),
+('SUV'),
+('Truck');
+
+-- Insert sample inventory rows for testing Assignment 2
+INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+VALUES
+('GM', 'Hummer', '2020', 'A rugged SUV with small interiors.', '/images/hummer.png', '/images/hummer-tn.png', 55000, 10000, 'Black', 2),
+('Toyota', 'Supra', '2022', 'A fast sports car with turbo engine.', '/images/supra.png', '/images/supra-tn.png', 60000, 5000, 'Red', 1),
+('Ford', 'F-150', '2021', 'A reliable truck with towing power.', '/images/f150.png', '/images/f150-tn.png', 45000, 12000, 'Blue', 3);
+
+-- === Assignment 2 Queries 4 & 6 ===
+
+-- 4. Update GM Hummer description (replace "small interiors" with "a huge interior")
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
+
+-- 6. Update image paths to include /vehicles
+UPDATE inventory
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');

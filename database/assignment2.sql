@@ -1,17 +1,17 @@
 -- Assignment 2 SQL Statements
 
 -- 1. Insert Tony Stark into the account table
-INSERT INTO account (first_name, last_name, email, password)
+INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
 VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
 
 -- 2. Change Tony Stark's account_type to Admin
 UPDATE account
 SET account_type = 'Admin'
-WHERE email = 'tony@starkent.com';
+WHERE account_email = 'tony@starkent.com';
 
 -- 3. Delete Tony Stark's record
 DELETE FROM account
-WHERE email = 'tony@starkent.com';
+WHERE account_email = 'tony@starkent.com';
 
 -- 4. Update GM Hummer description (replace "small interiors" with "a huge interior")
 UPDATE inventory
