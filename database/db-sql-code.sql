@@ -58,13 +58,52 @@ INSERT INTO classification (classification_name) VALUES
 ('SUV'),
 ('Truck');
 
--- Insert sample inventory rows for testing Assignment 2
-INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
-VALUES
-('GM', 'Hummer', '2020', 'A rugged SUV with small interiors.', '/images/hummer.png', '/images/hummer-tn.png', 55000, 10000, 'Black', 2),
-('Toyota', 'Supra', '2022', 'A fast sports car with turbo engine.', '/images/supra.png', '/images/supra-tn.png', 60000, 5000, 'Red', 1),
-('Ford', 'F-150', '2021', 'A reliable truck with towing power.', '/images/f150.png', '/images/f150-tn.png', 45000, 12000, 'Blue', 3);
+-- Insert inventory rows (based on your public/images/vehicles folder)
+INSERT INTO inventory (
+    inv_make, inv_model, inv_year, inv_description,
+    inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id
+) VALUES
+-- Sport Cars
+('Lamborghini', 'Adventador', 2020, 'A luxury sports car with V12 engine.',
+'/images/vehicles/adventador.jpg', '/images/vehicles/adventador-tn.jpg', 400000, 5000, 'White', 1),
+('Toyota', 'Supra', 2022, 'A fast sports car with turbo engine.',
+ '/images/vehicles/no-image.png', '/images/vehicles/no-image-tn.png', 60000, 5000, 'Red', 1),
+('Chevrolet', 'Camaro', 2021, 'A classic American muscle car.',
+ '/images/vehicles/camaro.jpg', '/images/vehicles/camaro-tn.jpg', 35000, 8000, 'Black', 1),
+('Ford', 'Crown Victoria', 2011, 'A full-sized sedan often used as police interceptors.',
+ '/images/vehicles/crwn-vic.jpg', '/images/vehicles/crwn-vic-tn.jpg', 12000, 60000, 'White', 1),
+('DeLorean', 'DMC-12', 1985, 'The famous time machine car from Back to the Future.',
+ '/images/vehicles/delorean.jpg', '/images/vehicles/delorean-tn.jpg', 50000, 30000, 'Silver', 1),
+('Batmobile', 'Batmobile', 2016, 'The Dark Knight’s iconic ride.',
+ '/images/vehicles/batmobile.jpg', '/images/vehicles/batmobile-tn.jpg', 999999, 500, 'Black', 1),
 
+-- SUVs
+('GM', 'Hummer', 2020, 'A rugged SUV with small interiors.',
+ '/images/vehicles/hummer.jpg', '/images/vehicles/hummer-tn.jpg', 55000, 10000, 'Black', 2),
+('Cadillac', 'Escalade', 2021, 'A luxury SUV with spacious interiors.',
+ '/images/vehicles/escalade.jpg', '/images/vehicles/escalade-tn.jpg', 80000, 7000, 'Black', 2),
+('Chevrolet', 'Suburban', 2019, 'A large SUV with high capacity.',
+ '/images/vehicles/survan.jpg', '/images/vehicles/survan-tn.jpg', 45000, 20000, 'Brown', 2),
+('Jeep', 'Wrangler', 2020, 'A rugged off-road SUV.',
+ '/images/vehicles/wrangler.jpg', '/images/vehicles/wrangler-tn.jpg', 32000, 15000, 'Yellow', 2),
+('Dog Car', 'Shaggin Wagon', 2001, 'The famous van from Dumb and Dumber.',
+ '/images/vehicles/dog-car.jpg', '/images/vehicles/dog-car-tn.jpg', 15000, 90000, 'Tan', 2),
+('Mystery Machine', 'Scooby-Doo Van', 1970, 'The iconic van from Scooby-Doo.',
+ '/images/vehicles/mystery-van.jpg', '/images/vehicles/mystery-van-tn.jpg', 20000, 75000, 'Green/Blue', 2),
+
+-- Trucks
+('Ford', 'F-150', 2021, 'A reliable truck with towing power.',
+ '/images/vehicles/no-image.png', '/images/vehicles/no-image-tn.png', 45000, 12000, 'Blue', 3),
+('Monster Truck', 'Bigfoot', 2018, 'A powerful monster truck for shows.',
+ '/images/vehicles/monster-truck.jpg', '/images/vehicles/monster-truck-tn.jpg', 75000, 3000, 'Blue', 3),
+('Fire Truck', 'Engine 51', 2015, 'A fire department emergency vehicle.',
+ '/images/vehicles/fire-truck.jpg', '/images/vehicles/fire-truck-tn.jpg', 100000, 15000, 'Red', 3),
+('Ford', 'Model T', 1920, 'The car that changed history.',
+ '/images/vehicles/model-t.jpg', '/images/vehicles/model-t-tn.jpg', 20000, 100000, 'Black', 3),
+('Mechanic', 'Tow Truck', 2010, 'A trusty tow truck.',
+ '/images/vehicles/mechanic.jpg', '/images/vehicles/mechanic-tn.jpg', 18000, 85000, 'Red', 3),
+('Aerocar', 'Flying Car', 1956, 'A rare experimental flying car.',
+ '/images/vehicles/aerocar.jpg', '/images/vehicles/aerocar-tn.jpg', 90000, 2000, 'Yellow', 3);
 -- === Assignment 2 Queries 4 & 6 ===
 
 -- 4. Update GM Hummer description (replace "small interiors" with "a huge interior")
