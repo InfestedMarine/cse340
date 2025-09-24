@@ -1,0 +1,24 @@
+<main>
+  <h2><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h2>
+
+  <div class="vehicle-detail">
+    <!-- Left: Image -->
+    <div class="vehicle-image">
+      <img src="<%= vehicle.inv_image %>" alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+    </div>
+
+    <!-- Right: Info -->
+    <div class="vehicle-info">
+      <div class="buy-box">
+        <button class="buy-btn">Buy</button>
+        <span class="price">$<%= vehicle.inv_price.toLocaleString() %></span>
+      </div>
+
+      <div class="vehicle-meta">
+        <p><strong>Mileage:</strong> <%= vehicle.inv_miles.toLocaleString() %> miles</p>
+        <p><strong>Color:</strong> <%= vehicle.inv_color %></p>
+        <p><%= vehicle.inv_description %></p>
+      </div>
+    </div>
+  </div>
+</main>

@@ -26,3 +26,14 @@ async function getInventoryByClassificationId(classification_id) {
     console.error("getclassificationsbyid error " + error)
   }
 }
+
+/* **************************************
+* Get vehicle details by inv_id
+* ************************************ */
+
+async function getVehicleById(invId) {
+  return pool.query(
+    "SELECT * FROM inventory WHERE inv_id = $1",
+    [invId]
+  );
+}
