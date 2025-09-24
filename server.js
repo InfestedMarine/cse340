@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const errorRoutes = require("./routes/errorRoute")
 
 /* ***********************
  * View Engine and Templates
@@ -19,6 +20,8 @@ const inventoryRoute = require("./routes/inventoryRoute")
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout.ejs") // not at views root
+app.use("/error", errorRoutes)
+
 
 
 /* ***********************
@@ -51,8 +54,13 @@ app.listen(port, () => {
 /* ***********************
  * Middleware
  *************************/
+const utilities = require("./utilities/")
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).render("error", { message: "Something went wrong", nav });
-});
+app.use(async (err, req, res, next) => {
+  console.error("Error stack trace:", err.stack)
+  const nav = await utilities.getNav() 
+  res.status(500).render("error", { 
+    message: "Something went wrong: " + err.message,
+    nav
+  })
+})

@@ -34,4 +34,19 @@ invCont.buildById = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ * Force an intentional error
+ * ************************** */
+const Util = require("../utilities/") // for nav
+const errorController = {}
+
+errorController.throwError = async function (req, res, next) {
+  try {
+    // This intentionally triggers an error
+    throw new Error("Intentional test error for Task 3")
+  } catch (err) {
+    next(err) // Passes the error to your error middleware
+  }
+}
+
  module.exports = invCont
