@@ -63,7 +63,7 @@ Util.buildClassificationGrid = async function(data){
 * Build vehicle detail view
 * ************************************ */
 
-function buildVehicleDetailHTML(vehicle) {
+Util.buildVehicleDetailHTML = function(vehicle) {
   return `
     <div class="vehicle-detail">
       <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
