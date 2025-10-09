@@ -73,3 +73,11 @@ Util.buildVehicleDetailHTML = function(vehicle) {
       <p>${vehicle.inv_description}</p>
     </div>`;
 }
+
+/* ****************************************
+ *  Error handling middleware wrapper
+ *  Allows async controller functions to use try/catch automatically
+ * **************************************** */
+Util.handleErrors = fn => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next)
+}

@@ -15,6 +15,9 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoutes = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require('./database/')
+const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
+
 
 /* ***********************
  * View Engine and Templates
@@ -57,6 +60,8 @@ app.use(function(req, res, next){
   next()
   
 })
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for form submissions
 
 
 
@@ -71,6 +76,8 @@ app.use('/img', express.static(__dirname + 'public/img'))
 app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
+// Account Route
+app.use("/account", accountRoute)
 
 /* ***********************
  * Local Server Information
