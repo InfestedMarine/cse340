@@ -55,5 +55,15 @@ async function registerAccount(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount}
+/* ****************************************
+*  Process login
+* *************************************** */
+async function accountLogin(req, res, next) {
+  const { account_email, account_password } = req.body
+  console.log("Login attempt:", account_email)
+  // TODO: check credentials from database later
+  res.send("Login POST route working!")
+}
+
+module.exports = {buildLogin, buildRegister, registerAccount, accountLogin}
 
