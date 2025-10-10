@@ -480,3 +480,219 @@ footer {
 .alt-link a:hover {
   color: #3c7a41;
 }
+
+
+/* ===== Add Inventory Page ===== */
+main h1 {
+  color: #2f5d34;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Message styling (success/error) */
+.notice {
+  list-style: none;
+  background-color: #ffeaea;
+  color: #a33;
+  padding: 0.75rem 1rem;
+  border: 1px solid #f5bcbc;
+  border-radius: 6px;
+  max-width: 600px;
+  margin: 1rem auto;
+  text-align: left;
+}
+
+/* Add Inventory Form */
+form {
+  background-color: #eafbea; /* light green box */
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 2rem auto;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Form Labels */
+form label {
+  font-weight: bold;
+  color: #2f5d34;
+  margin-bottom: 0.3rem;
+}
+
+/* Text Inputs, Selects, Textareas */
+form input,
+form select,
+form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+}
+
+form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Submit Button */
+form button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Responsive tweaks */
+@media (min-width: 768px) {
+  form {
+    padding: 2.5rem;
+  }
+}
+
+/* ===== Add Classification Page ===== */
+main h1 {
+  color: #2f5d34;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Add Classification Form */
+form[action="/inv/add-classification"] {
+  background-color: #eafbea; /* light green panel */
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Label styling */
+form[action="/inv/add-classification"] label {
+  font-weight: bold;
+  color: #2f5d34;
+}
+
+/* Input field styling */
+form[action="/inv/add-classification"] input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form[action="/inv/add-classification"] input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+}
+
+/* Submit button */
+form[action="/inv/add-classification"] button {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+form[action="/inv/add-classification"] button:hover {
+  background-color: #3e8e41;
+}
+
+/* Validation notice list */
+.notice {
+  list-style: none;
+  background-color: #ffeaea;
+  color: #a33;
+  padding: 0.75rem 1rem;
+  border: 1px solid #f5bcbc;
+  border-radius: 6px;
+  max-width: 450px;
+  margin: 1rem auto;
+  text-align: left;
+}
+
+/* ===== Inventory Management Page ===== */
+.admin-links {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  text-align: center;
+}
+
+.admin-links li a {
+  display: block;
+  background-color: #4caf50; /* green buttons */
+  color: white;
+  text-decoration: none;
+  padding: 0.9rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.admin-links li a:hover {
+  background-color: #3e8e41; /* darker hover */
+  transform: translateY(-2px);
+}
+
+/* Success message */
+.success {
+  background-color: #eafbea;
+  color: #2f5d34;
+  border: 1px solid #b3e6b3;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  max-width: 500px;
+  margin: 1rem auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Center title and messages */
+main h1 {
+  color: #2f5d34;
+  margin-bottom: 1rem;
+  text-align: center;
+}
