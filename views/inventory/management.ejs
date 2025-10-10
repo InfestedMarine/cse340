@@ -1,0 +1,12 @@
+<main>
+  <h1><%= title %></h1>
+  <%- messages() %>
+  <% if (message) { %>
+    <p class="success"><%= message %></p>
+  <% } %>
+
+  <ul class="admin-links">
+    <li><a href="/inv/add-classification">Add Classification</a></li>
+    <li><a href="/inv/add-inventory">Add Vehicle</a></li>
+  </ul>
+</main>
