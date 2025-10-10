@@ -54,7 +54,17 @@ invCont.addClassification = async function (req, res, next) {
   const nav = await utilities.getNav()
   const { classification_name } = req.body
 
-  const result = await invModel.addClassification(classification_name)
+  // 🔒 Validate before inserting
+  if (!classification_name || classification_name.trim() === "") {
+    req.flash("notice", "Classification name is required.")
+    return res.status(400).render("inventory/add-classification", {
+      title: "Add New Classification",
+      nav,
+      errors: null
+    })
+  }
+
+  const result = await invModel.addClassification(classification_name.trim())
   if (result) {
     req.flash("notice", `"${classification_name}" added successfully.`)
     return res.render("inventory/management", {
@@ -71,7 +81,6 @@ invCont.addClassification = async function (req, res, next) {
     })
   }
 }
-
 /* ****************************************
 *  Deliver inventory management view
 * *************************************** */
@@ -132,11 +141,13 @@ invCont.addInventory = async function (req, res, next) {
   if (result) {
     req.flash("notice", `"${inv_make} ${inv_model}" added successfully.`)
     res.redirect("/inv")
-  } else {
+    } else {
     req.flash("notice", "Failed to add inventory item.")
+    const classifications = await invModel.getClassifications()
     res.status(500).render("inventory/add-inventory", {
       title: "Add New Inventory Item",
       nav,
+      classifications: classifications.rows,
       errors: null
     })
   }
