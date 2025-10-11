@@ -1,6 +1,8 @@
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* ****************************************
 *  Deliver Login View
@@ -83,11 +85,85 @@ async function registerAccount(req, res) {
 *  Process login
 * *************************************** */
 async function accountLogin(req, res, next) {
+  let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
-  console.log("Login attempt:", account_email)
-  // TODO: check credentials from database later
-  res.send("Login POST route working!")
+
+  const accountData = await accountModel.getAccountByEmail(account_email)
+  if (!accountData) {
+    req.flash("notice", "Invalid email or password.")
+    return res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  }
+
+  try {
+    const match = await bcrypt.compare(account_password, accountData.account_password)
+    if (!match) {
+      req.flash("notice", "Invalid email or password.")
+      return res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+      })
+    }
+
+    // Create JWT
+    const token = jwt.sign(
+      { 
+        account_id: accountData.account_id,
+        account_firstname: accountData.account_firstname,
+        account_lastname: accountData.account_lastname,
+        account_email: accountData.account_email,
+        account_type: accountData.account_type
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" }
+    )
+
+    res.cookie("jwt", token, { httpOnly: true, secure: true, maxAge: 3600000 })
+    return res.redirect("/account/")
+
+  } catch (error) {
+    console.error("Login error:", error)
+    req.flash("notice", "An unexpected error occurred during login.")
+    res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  }
 }
 
-module.exports = {buildLogin, buildRegister, registerAccount, accountLogin}
+/* *****************************
+* Return account data using email address
+* ***************************** */
+async function getAccountByEmail(account_email) {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
+      [account_email]
+    )
+    return result.rows[0]
+  } catch (error) {
+    return new Error("No matching email found")
+  }
+}
+
+/* ****************************************
+*  Deliver Account Management view
+* *************************************** */
+async function buildManagement(req, res, next) {
+  let nav = await utilities.getNav()
+  const accountData = res.locals.accountData // comes from checkJWTToken
+
+  res.render("account/management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+    accountData,
+  })
+}
+module.exports = {buildLogin, buildRegister, registerAccount, accountLogin, getAccountByEmail, buildManagement}
 

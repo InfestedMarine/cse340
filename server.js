@@ -17,6 +17,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 
 /* ***********************
@@ -30,7 +31,10 @@ app.use("/error", errorRoutes)
 /* ***********************
  * Middleware
  *************************/
+
 const utilities = require("./utilities/")
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 app.use(async (err, req, res, next) => {
   console.error("Error stack trace:", err.stack)
@@ -78,6 +82,7 @@ app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
 // Account Route
 app.use("/account", accountRoute)
+
 
 /* ***********************
  * Local Server Information

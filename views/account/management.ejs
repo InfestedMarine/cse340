@@ -1,0 +1,10 @@
+<main>
+  <h1>Account Management</h1>
+  <%- messages() %>
+
+  <% if (typeof message !== 'undefined' && message) { %>
+  <p class="success"><%= message %></p>
+  <% } %>
+
+  <p>You’re logged in, <%= accountData.account_firstname %>!</p>
+</main>
