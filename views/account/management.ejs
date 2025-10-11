@@ -2,9 +2,27 @@
   <h1>Account Management</h1>
   <%- messages() %>
 
-  <% if (typeof message !== 'undefined' && message) { %>
-  <p class="success"><%= message %></p>
-  <% } %>
+  <% if (loggedin && (accountData.account_type === 'Employee' || accountData.account_type === 'Admin')) { %>
+    <p class="success"></p>
+    <ul class="admin-links">
+        <li>
+            <a href="/inv/add-classification">Add New Classification</a>
+        </li>
+        <li>
+            <a href="/inv/add-inventory">Add New Vehicle</a>
+        </li>
+    </ul>
 
-  <p>You’re logged in, <%= accountData.account_firstname %>!</p>
+
+    <h2>Manage Inventory</h2>
+    <p>Choose a classification to see the inventory items.</p>
+
+    <%- classificationSelect %>
+
+    <table id="inventoryDisplay"></table>
+
+    <script src="/js/inventory.js"></script>
+  <% } else { %>
+    <p>You do not have permission to manage inventory.</p>
+  <% } %>
 </main>

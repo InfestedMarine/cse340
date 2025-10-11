@@ -138,4 +138,18 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
+/* ****************************************
+ * Middleware to check if user is Admin or Employee
+ **************************************** */
+Util.checkAdminOrEmployee = (req, res, next) => {
+  const accountData = res.locals.accountData
+  if (accountData && (accountData.account_type === 'Admin' || accountData.account_type === 'Employee')) {
+    next()
+  } else {
+    req.flash("notice", "You do not have permission to access that page.")
+    return res.redirect("/account/login")
+  }
+}
+
+
 module.exports = Util

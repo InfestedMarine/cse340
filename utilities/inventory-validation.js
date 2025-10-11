@@ -82,4 +82,61 @@ validate.checkInventory = async (req, res, next) => {
   next()
 }
 
+/* New inventory rules for update */
+validate.newInventoryRules = () => {
+  return [
+    body("classification_id").trim().notEmpty().withMessage("Please select a classification."),
+    body("inv_make").trim().escape().notEmpty().withMessage("Please provide the vehicle make."),
+    body("inv_model").trim().escape().notEmpty().withMessage("Please provide the vehicle model."),
+    body("inv_year").trim().escape().notEmpty().isInt({ min: 1900, max: 2100 }).withMessage("Provide a valid year."),
+    body("inv_description").trim().escape().notEmpty().withMessage("Please provide a description."),
+    body("inv_image").trim().escape().notEmpty().withMessage("Please provide the image path."),
+    body("inv_thumbnail").trim().escape().notEmpty().withMessage("Please provide the thumbnail path."),
+    body("inv_price").trim().notEmpty().isFloat({ min: 0 }).withMessage("Provide a valid price."),
+    body("inv_miles").trim().notEmpty().isInt({ min: 0 }).withMessage("Provide valid mileage."),
+  ]
+}
+
+/* Check update data */
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color
+  } = req.body
+
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav()
+    const classificationList = await utilities.buildClassificationList(classification_id)
+    res.status(400).render("inventory/edit-inventory", {
+      title: `Edit ${inv_make} ${inv_model}`,
+      nav,
+      errors,
+      classificationList,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate

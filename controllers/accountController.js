@@ -155,15 +155,25 @@ async function getAccountByEmail(account_email) {
 *  Deliver Account Management view
 * *************************************** */
 async function buildManagement(req, res, next) {
-  let nav = await utilities.getNav()
-  const accountData = res.locals.accountData // comes from checkJWTToken
+  try {
+    const nav = await utilities.getNav()
+    const accountData = res.locals.accountData
+    const message = req.flash("notice") || null
+    const classificationSelect = await utilities.buildClassificationList()
 
-  res.render("account/management", {
-    title: "Account Management",
-    nav,
-    errors: null,
-    accountData,
-  })
+    res.render("account/management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      accountData,
+      message,
+      classificationSelect 
+    })
+  } catch (error) {
+    next(error)
+  }
 }
+
+
 module.exports = {buildLogin, buildRegister, registerAccount, accountLogin, getAccountByEmail, buildManagement}
 
