@@ -1,9 +1,11 @@
 <main>
-  <h1>Account Management</h1>
+  <h1><%= title %></h1>
   <%- messages() %>
+  <% if (message) { %>
+    <p class="success"><%= message %></p>
+  <% } %>
 
   <% if (loggedin && (accountData.account_type === 'Employee' || accountData.account_type === 'Admin')) { %>
-    <p class="success"></p>
     <ul class="admin-links">
         <li>
             <a href="/inv/add-classification">Add New Classification</a>

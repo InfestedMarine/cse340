@@ -31,5 +31,11 @@ router.get("/edit/:inv_id", utilities.checkJWTToken, utilities.checkAdminOrEmplo
 // Route to process updates to an existing inventory item
 router.post("/update",newInventoryRules(),checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
+// Deliver delete confirmation view
+router.get("/delete/:inv_id", invController.deleteInventoryView);
+
+// Handle actual delete
+router.post("/delete", invController.deleteInventory);
+
 
 module.exports = router;
